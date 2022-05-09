@@ -1,0 +1,247 @@
+$font: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+$black: #000;
+$darkest-grey: #111;
+$darker-grey: #222;
+$dark-grey: #333;
+$grey: #666;
+$light-grey: #999;
+$lighter-grey: #CCC;
+$lightest-grey: #EEE;
+$white: #FFF;
+
+$nav: #cf980b;
+$primary: #f47321;
+$primaryDark: #ffc107;
+$primaryAlt: #8da335;
+$secondary: #8da335;
+$background: #1b1402;
+$error: #e84118;
+$success: #009432;
+
+
+@mixin btn {
+	padding: 0.75rem 1.25rem;
+	background-color: transparent;
+	border: 1px solid transparent;
+	border-radius: 5px;
+	font-family: $font;
+	font-size: 1rem;
+	cursor: pointer;
+	font-weight: 500;
+	transition: all 0.3s ease-in-out 0s;
+	text-transform: capitalize;
+
+	&:hover {
+		box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+	}
+}
+
+
+@mixin primaryBtn {
+	.primaryBtn {
+		@include btn;
+
+		background-color: $primary;
+		border-color: $primary;
+		color: $white;
+
+		&:hover {
+			background-color: $black;
+			color: $white;
+			border-color: $black;
+		}
+	}
+}
+
+
+@mixin secondaryBtn {
+	.secondaryBtn {
+		@include btn;
+
+		border-color: $primary;
+		color: $primary;
+
+		&:hover {
+			background-color: $primary;
+			color: $white;
+		}
+	}
+}
+
+
+@mixin blackBtn {
+	.blackBtn {
+		@include btn;
+
+		background-color: $darker-grey;
+		border-color: $darker-grey;
+		color: $lightest-grey;
+
+		&:hover {
+			background-color: $black;
+			color: $white;
+			border-color: $black;
+			top: -0.35rem;
+			box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+		}
+	}
+}
+
+@mixin buttonHolder {
+	.buttonHolder {
+		@include blackBtn;
+		
+		text-align: center;
+		margin-top: 7rem;
+	}
+}
+
+
+@mixin input {
+	input[type=text], input[type=email], input[type=password], input[type=number], input[type=file], select, textarea {
+		border: 1px solid $light-grey;
+		font-family: $font;
+		background-color: transparent;
+		font-size: 1rem;
+		padding: 1rem;
+		width: 100%;
+		transition: all 0.3s ease-in-out 0s;
+		border-radius: 5px;
+
+		&:focus {
+			outline: 0;
+			border-color: $dark-grey;
+		}
+	}
+
+	input[type=file] {
+		width: auto;
+	}
+}
+
+
+@mixin inputHolder {
+	@include input;
+	@include primaryBtn;
+
+	> div {
+		margin-bottom: 1rem;
+
+		h4 {
+			font-size: 1rem;
+			text-transform: uppercase;
+			margin-bottom: 0.5rem;
+			color: $dark-grey;
+			font-weight: 600;
+		}
+	}
+}
+
+
+@mixin container {
+	.container {
+		max-width: 1280px;
+		margin: 0 auto;
+	}
+}
+
+
+@mixin table {
+	table {
+		border: 0;
+		width: 100%;
+		border-collapse: collapse;
+
+		thead {
+			tr {
+				th {
+					font-weight: 600;
+					border-bottom: 2px solid $primary;
+					padding: 1rem;
+					text-transform: uppercase;
+					font-size: 0.95rem;
+					text-align: left;
+					color: $primary;
+				}
+			}
+		}
+
+		tbody {
+			tr {
+				td {
+					padding: 1rem;
+					color: $grey;
+					border-bottom: 1px solid $lightest-grey;
+					font-size: 0.9rem;
+
+					&:first-child {
+						color: $dark-grey;
+						text-transform: capitalize;
+					}
+				}
+
+				&:last-child {
+					td {
+						border-bottom: 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+@mixin titleAction {
+	.titleAction {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 2rem;
+
+		@include primaryBtn;
+
+		h1 {
+			font-weight: 600;
+			font-size: 2rem;
+			text-transform: capitalize;
+		}
+
+		.primaryBtn {
+			display: flex;
+			gap: 1rem;
+			width: auto;
+			align-items: center;
+
+			svg {
+				width: 1.5rem;
+				height: 1.5rem;
+
+				path {
+					fill: $white;
+				}
+			}
+		}
+	}
+}
+
+
+@mixin responseText {
+	.messageBox {
+		padding: 5px 10px;
+		font-size: 0.875rem;
+		border-radius: 3px;
+		color: $white;
+		margin-top: 0.5rem;
+		display: inline-flex;
+
+		&.success {
+			background-color: $success;
+		}
+
+		&.error {
+			background-color: $error;
+		}
+	}
+}

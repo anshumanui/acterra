@@ -1,0 +1,19 @@
+@import '_mixin';
+
+.dashboardAdmin {
+	display: flex;
+
+	.content {
+		padding: 3rem;
+		flex: 1;
+		background-color: $lightest-grey;
+		height: 100vh;
+		overflow-y: scroll;
+
+		h1 {
+			&:nth-of-type(2) {
+				margin-top: 4rem;
+			}
+		}
+	}
+}

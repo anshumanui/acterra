@@ -1,0 +1,70 @@
+@import '_mixin';
+
+.aside {
+	background-color: $background;
+	text-align: center;
+
+	nav {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+
+		figure {
+			padding: 2rem;
+
+			img {
+				filter: grayscale(100%);
+			}
+		}
+
+		.loggedinInfo {
+			color: $lighter-grey;
+			margin-bottom: auto;
+			padding: 2rem;
+
+			p {
+				padding: 1rem 0;
+
+				&:nth-of-type(2), &:nth-of-type(3) {
+					font-size: 0.875rem;
+					color: rgba(255,255,255,0.35);
+					padding: 0.15rem 0;
+				}
+			}
+		}
+
+		ul {
+			margin-bottom: auto;
+			cursor: pointer;
+			text-align: left;
+
+			li {
+				padding: 1.25rem 2rem;
+				border-bottom: 1px solid rgba(255,255,255,0.1);
+				color: $light-grey;
+				transition: all 0.3s ease-in-out 0s;
+
+				&:first-child {
+					border-top: 1px solid rgba(255,255,255,0.1);
+				}
+
+				&:hover {
+					color: $lightest-grey;
+					background-color: #171e23;
+				}
+			}
+		}
+
+		.navFooter {
+			color: rgba(255,255,255,0.25);
+			font-size: 0.75rem;
+			margin-top: auto;
+			padding: 2rem;
+		}
+	}
+
+	&.admin {
+		background-color: #1e272e;
+	}
+}

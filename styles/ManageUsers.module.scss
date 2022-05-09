@@ -1,0 +1,48 @@
+@import '_mixin';
+
+.manageUsers {
+	h1 {
+		margin-bottom: 1.5rem;
+		font-weight: 600;
+		font-size: 2rem;
+	}
+
+	> div {
+		background-color: $white;
+		padding: 2rem;
+		border-radius: 5px;
+
+		@include table;
+
+		table {
+			tbody {
+				tr {
+					td {
+						&:last-child {
+							display: flex;
+							align-items: center;
+							gap: 1rem;
+						}
+
+						span {
+							display: inline-block;
+
+							&:nth-child(1) {
+								margin-right: 2rem;
+							}
+
+							&:not(&:nth-child(1)) {
+								text-overflow: ellipsis;
+								width: 10rem;
+								white-space: nowrap;
+								overflow: hidden;
+								margin-right: 1rem;
+								text-transform: capitalize;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,54 @@
+@import '_mixin';
+
+.createCourse {
+	@include titleAction;
+
+	form {
+		@include inputHolder;
+		@include secondaryBtn;
+
+		ul {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+
+			li {
+				border: 1px solid $lighter-grey;
+				border-radius: 5px;
+				padding: 2rem;
+				display: flex;
+				justify-content: space-between;
+				gap: 1rem;
+				position: relative;
+
+				span {
+					position: absolute;
+					right: -0.75rem;
+					top: -0.75rem;
+					background-color: $dark-grey;
+					display: flex;
+					padding: 0.5rem;
+					border-radius: 50%;
+					cursor: pointer;
+
+					svg {
+						width: 0.75rem;
+						height: 0.75rem;
+
+						path {
+							fill: $white;
+						}
+					}
+				}
+
+				@include inputHolder;
+			}
+		}
+
+		.buttonContainer {
+			margin-top: 2rem;
+			display: flex;
+			justify-content: space-between;
+		}
+	}
+}
