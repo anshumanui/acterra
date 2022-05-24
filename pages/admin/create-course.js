@@ -5,37 +5,55 @@ import styles from './../../styles/createCourse.module.scss';
 import { AddIcon, CloseIcon, UploadIcon, EditIcon, DeleteIcon } from './../../components/svgIcons';
 import InputHolder from './../../components/InputHolder';
 import { useFormData, useSessionData } from './../../components/Common';
-import { CreateCoursesCatFormData, CreateCoursesSubCatFormData } from './../../components/FormData';
+import { CreateCoursesCatFormData } from './../../components/FormData';
 
 
 const CreateCourse = () => {
 	const sessionData = useSessionData();
-	const [catFormData, setCatFormData] = useState(CreateCoursesCatFormData);
-	const [subCatFormData, setSubCatFormData] = useState(CreateCoursesSubCatFormData);
-	const [endCount, setEndCount] = useState(0);
-	const [updatedFormData, setUpdatedFormData] = useState([]);
+	const [catFormData, setCatFormData] = useFormData(CreateCoursesCatFormData);
+	const [count, setCount] = useState([]);
+	const [fileData, setFileData] = useState({});
 
 	const updateFormData = () => {
-		setEndCount(prevData => prevData + 1);
+		let tempArr = [1];
+		setCount(prevData => ([...prevData, ...tempArr]));
 	};
 
-	const fillFormData = () => {
-		let initFormData = subCatFormData;
-		initFormData.length = endCount;
-		initFormData.fill(initFormData[0]);
-		setUpdatedFormData(initFormData);
+	const closeFormRow = (index) => {
+		const tempArr = [...count];
+		tempArr.splice(index, 1, null);
+		setCount(tempArr);
+
+		const tempData = {...fileData};
+		delete tempData[index];
+		setFileData(tempData);
 	};
 
-	const closeFormRow = () => {
-		setUpdatedFormData(prevData => prevData.splice(updatedFormData.length, 1));
-		setEndCount(prevData => prevData - 1);
-	}
+	const saveFileData = (event, index) => {
+		setFileData(prevData => ({
+			...prevData,
+			[index]: ({
+				...prevData[index],
+				[event.target.name]: event.target.type === 'file' ? event.target.files[0] : event.target.value
+			})
+		}));
+	};
+
+	const submitFormData = (event) => {
+		event.preventDefault();
+
+		const requiredData = {};
+        for (let i=0; i < catFormData.length; i++) {
+            requiredData = {...requiredData, [catFormData[i].iName]: catFormData[i].iValue}
+        }
+
+        console.log(requiredData, fileData);
+	};
 
 	useEffect(() => {
-		if (endCount) {
-			fillFormData();
-		}
-	}, [endCount]);
+		const tempArr = [...count];
+		setCount(tempArr);
+	}, []);
 
 	return (
 		<Layout>
@@ -48,22 +66,47 @@ const CreateCourse = () => {
 				</div>
 				<form onSubmit={ (event) => submitFormData(event) }>
                     {
-                        catFormData.map((item, index) => <InputHolder key={`ih__cat_${index}`} {...item} {...{setCatFormData}} />)
+                        catFormData.map((item, index) => <InputHolder key={`ih__cat_${index}`} {...item} setFormData={setCatFormData} />)
                     }
 
                     {
-                    	updatedFormData.length ? (
+                    	count.length ? (
                     		<ul>
                     			{
-                    				updatedFormData.map((item, index) => {
-                    					return (
-                    						<li key={`li_subcat_${index}`}>
-                    							<span onClick={ () => closeFormRow() }><CloseIcon /></span>
-                    							<InputHolder {...item} {...{setSubCatFormData}} />
-                    							<input type="file" name="UploadPPT" />
-                    							<input type="file" name="UploadPDF" />
-                    						</li>
-                    					)
+                    				count.map((emptyItem, emptyIndex) => {
+                    					if (emptyItem) {
+	                    					return (
+	                    						<li key={`li_subcat_${emptyIndex}`}>
+	                    							<span onClick={ () => closeFormRow(emptyIndex) }><CloseIcon /></span>
+	                    							<div>
+											            <h4>course subtitle</h4>
+											            <input 
+											                type="text"
+											                name="subtitle"
+											                placeholder="Course Subtitle"
+											                required 
+											                onChange={ (event) => saveFileData(event, emptyIndex) }
+											            />
+											        </div>
+	                    							<div>
+		                    							<h4>Upload PPT</h4>
+		                    							<input 
+		                    								type="file" 
+		                    								name="UploadPPT" 
+		                    								onChange={ (event) => saveFileData(event, emptyIndex) } 
+		                    							/>
+		                    						</div>
+		                    						<div>
+		                    							<h4>Upload PDF</h4>
+		                    							<input 
+		                    								type="file" 
+		                    								name="UploadPDF" 
+		                    								onChange={ (event) => saveFileData(event, emptyIndex) } 
+		                    							/>
+		                    						</div>
+	                    						</li>
+	                    					)
+	                    				}
                     				})
                     			}
                     		</ul>

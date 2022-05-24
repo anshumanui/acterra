@@ -34,6 +34,27 @@
 
 				a {
 					color: $primary;
+				}				
+			}
+
+			.errorMessage {
+				background-color: rgba(232,65,24,0.15);
+				border: 1px solid rgba(232,65,24,0.5);
+				color: $error;
+				padding: 1rem;
+				border-radius: 5px;
+				margin-bottom: 2rem;
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+
+				svg {
+					width: 1.5rem;
+					height: 1.5rem;
+
+					path {
+						fill: $error;
+					}
 				}
 			}
 		}

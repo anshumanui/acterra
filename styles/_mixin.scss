@@ -101,9 +101,9 @@ $success: #009432;
 
 @mixin input {
 	input[type=text], input[type=email], input[type=password], input[type=number], input[type=file], select, textarea {
-		border: 1px solid $light-grey;
+		border: 1px solid $lighter-grey;
 		font-family: $font;
-		background-color: transparent;
+		background-color: $white;
 		font-size: 1rem;
 		padding: 1rem;
 		width: 100%;
@@ -112,12 +112,8 @@ $success: #009432;
 
 		&:focus {
 			outline: 0;
-			border-color: $dark-grey;
+			border-color: $grey;
 		}
-	}
-
-	input[type=file] {
-		width: auto;
 	}
 }
 

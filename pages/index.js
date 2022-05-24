@@ -1,29 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Login from './../components/Login';
-import Dashboard from './../pages/dashboard';
+import { useSessionData } from './../components/Common';
 
 
 const Home = () => {  
-    const [loginStatus, setLoginStats] = useState(false);
+    const router = useRouter();
+    const sessionData = useSessionData();
+    const adminStatus = false;
 
-    const loginSuccess = (status) => {
-        setLoginStats(status);
-    };
-
-    let sessionUserData = null;
-
-    useEffect(() => {
-        sessionUserData = sessionStorage.getItem('sessionUserData');
-        if (sessionUserData) setLoginStats(true);
-    }, []);
-
-    if (loginStatus) {
-        return (
-            <Dashboard {...{loginSuccess}} />
-        );
+    if (sessionData) {
+        adminStatus ? router.push('/admin/dashboard') : router.push('/dashboard');
+        return null;
     }
 
-    return <Login {...{loginSuccess}} />;
+    return <Login {...{adminStatus}} />;
 };
 
 export default Home;

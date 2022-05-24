@@ -5,13 +5,6 @@ import Login from './Login';
 
 
 const Layout = ({ children }) => {
-    const sessionData = useSessionData();
-    const adminStatus = true;
-
-    if (!sessionData && sessionData === null) {
-        return <Login {...{adminStatus}} />;
-    }
-
     return (
         <div>
             <Head>

@@ -12,7 +12,7 @@ const Navbar = () => {
 
 	const removeStorage = () => {
 		sessionStorage.removeItem('userSessionData');
-		router.push('/admin');
+		sessionData.admin ? router.push('/admin') : router.push('/');
 	};
 
 	if (!sessionData && sessionData === null) {
@@ -34,7 +34,7 @@ const Navbar = () => {
 				</figure>
 				{
 					<div className={ styles.loggedinInfo }>
-						<p>{ `Welcome, ${sessionData.userName}` }</p>
+						<p>{ `Welcome, ${sessionData.name}` }</p>
 						<p>{ `Last login - 03 Apr, 2022 (Tue),` }</p>
 						<p>{ `12:34pm (IST)` }</p>
 					</div>
