@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Navbar from './Navbar';
 import { useSessionData } from './Common';
 import Login from './Login';
-import Loader from './Loader';
+import Spinner from './Spinner';
 
 
 const Layout = ({ children, isLoading }) => {
@@ -14,7 +14,7 @@ const Layout = ({ children, isLoading }) => {
                 <title>Acterra - Admin Dashboard</title>
             </Head>
             <Navbar />
-            { isLoading && <Loader /> }
+            { isLoading && <Spinner /> }
             <main>{ children }</main>
         </div>
     )

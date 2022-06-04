@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
 
-const Loader = () => { 
+const Spinner = () => { 
 	return (
-		<section className="loader">
+		<section className="spinner">
 			<figure>
 				<Image
 					src={ `/loader.gif` }
@@ -18,4 +18,4 @@ const Loader = () => {
 	)
 };
 
-export default Loader;
+export default Spinner;
