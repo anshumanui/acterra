@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 
-const Loader = () => {
+const Loader = () => { 
 	return (
 		<section className="loader">
 			<figure>
